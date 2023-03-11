@@ -109,4 +109,20 @@ class OrderBOImplTest {
         assertTrue(result);
         verify(dao).delete(ORDER_ID);
     }
+
+    @Test
+    void modifyOrder_Should_Return_True() throws SQLException, BOException {
+        Order order = new Order();
+        when(dao.update(order)).thenReturn(2);
+        boolean result = bo.modifyOrder(ORDER_ID, order);
+        assertTrue(result);
+    }
+
+    @Test
+    void modifyOrder_Should_Return_False() throws SQLException, BOException {
+        Order order = new Order();
+        when(dao.update(order)).thenReturn(0);
+        boolean result = bo.modifyOrder(ORDER_ID, order);
+        assertFalse(result);
+    }
 }

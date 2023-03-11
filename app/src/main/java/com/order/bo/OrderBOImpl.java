@@ -14,8 +14,8 @@ public class OrderBOImpl implements OrderBO {
         try {
             int result = dao.create(order);
 
-            if ( result == 0 ){
-               return false;
+            if (result == 0) {
+                return false;
             }
         } catch (SQLException e) {
             throw new BOException(e);
@@ -33,7 +33,7 @@ public class OrderBOImpl implements OrderBO {
             if (result == 0) {
                 return false;
             }
-        }  catch (SQLException e) {
+        } catch (SQLException e) {
             throw new BOException(e);
         }
         return true;
@@ -58,5 +58,20 @@ public class OrderBOImpl implements OrderBO {
 
     public void setDao(OrderDAO dao) {
         this.dao = dao;
+    }
+
+    @Override
+    public boolean modifyOrder(int id, Order order) throws BOException {
+        try {
+            dao.read(id);
+            int result = dao.update(order);
+            if (result == 0) {
+                return false;
+            }
+            order.setStatus("updated");
+        } catch (SQLException e) {
+            throw new BOException(e);
+        }
+        return true;
     }
 }
