@@ -37,6 +37,13 @@ class OrderBOImplTest {
         bo.setDao(dao);
     }
 
+
+    // Zadanie 18
+    @BeforeAll
+    public static void welcome() {
+        System.out.println("Welcome to OrderBO Test Suite");
+    }
+
     @Test
     void placeOrder_Should_Create_An_Order() throws SQLException, BOException {
         Order order = new Order();
@@ -255,6 +262,14 @@ class OrderBOImplTest {
         boolean result = bo.deleteOrder(2);
         assertTrue(result);
         verify(dao, atLeast(1)).delete(anyInt());
+    }
+
+    // Zadanie 17
+    @Disabled("SHOULD BE IGNORED")
+    @Test
+    void ignored_test() {
+        int wrongInt = 2;
+        assertEquals(4, wrongInt);
     }
 
 
